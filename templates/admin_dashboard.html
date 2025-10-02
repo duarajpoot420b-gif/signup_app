@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #ffb6e0, #d4a5ff);
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #d46bff, #ff80bf);
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-size: 26px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    nav {
+      background: white;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #d46bff;
+      font-weight: 600;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin: 0;
+      color: #a43dd4;
+      font-size: 22px;
+    }
+
+    .card p {
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff4fa6;
+    }
+
+    h2 {
+      margin: 20px;
+      color: #7a2fa7;
+    }
+
+    table {
+      width: 95%;
+      margin: 0 auto 40px;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    table thead {
+      background: #d46bff;
+      color: white;
+    }
+
+    table th, table td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    table tr:hover {
+      background: #fbe6ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #fff;
+      color: #999;
+      font-size: 14px;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <header>💜 Admin Dashboard</header>
+  <nav>
+    <a href="{{ url_for('index') }}">🏠 Home</a>
+    <a href="{{ url_for('dashboard') }}">📊 My Dashboard</a>
+    <a href="{{ url_for('logout') }}">🚪 Logout</a>
+  </nav>
+
+  <section class="stats">
+    <div class="card">
+      <h3>Total Users</h3>
+      <p>{{ total_users }}</p>
+    </div>
+    <div class="card">
+      <h3>Total Admins</h3>
+      <p>{{ total_admins }}</p>
+    </div>
+    <div class="card">
+      <h3>Active Users (7 days)</h3>
+      <p>-</p>
+    </div>
+    <div class="card">
+      <h3>New Users (7 days)</h3>
+      <p>-</p>
+    </div>
+  </section>
+
+  <h2>User Management</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>User ID</th>
+        <th>Email</th>
+        <th>Password Hash</th>
+        <th>Role</th>
+        <th>Created At</th>
+        <th>Last Login</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.fullname }}</td>
+        <td>{{ u.userid }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.password_hash }}</td>
+        <td>{{ u.role }}</td>
+        <td>{{ u.created_at }}</td>
+        <td>{{ u.last_login }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <footer>
+    Admin Panel © {{ now.year }}
+  </footer>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #9966ff, #ff99cc);
+      min-height: 100vh;
+      color: #333;
+    }
+    header {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: rgba(255,255,255,0.85);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    h2 {
+      margin-top: 0;
+      color: #9966ff;
+    }
+    .info {
+      margin: 15px 0;
+      padding: 15px;
+      border-left: 5px solid #ff66b2;
+      background: #fdf0f5;
+      border-radius: 5px;
+      text-align: left;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      border-radius: 30px;
+      background: linear-gradient(45deg, #ff66b2, #9966ff);
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>User Dashboard</h1>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+      {% if session['user']['role'] == 'admin' %}
+        <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+      {% endif %}
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Welcome, {{ user.fullname }} 🌸</h2>
+    <div class="info"><strong>User ID:</strong> {{ user.userid }}</div>
+    <div class="info"><strong>Email:</strong> {{ user.email }}</div>
+    <div class="info"><strong>Role:</strong> {{ user.role }}</div>
+    <div class="info"><strong>Account Created:</strong> {{ user.created_at }}</div>
+    <div class="info"><strong>Last Login:</strong> {{ user.last_login }}</div>
+
+    <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+  </div>
+</body>
+</html>

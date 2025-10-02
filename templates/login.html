@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="left-box">
+      <h1>Welcome Back!</h1>
+      <p>Please login to continue</p>
+    </div>
+
+    <div class="right-box">
+      <div class="form-container">
+        <div class="top-links">
+          <a href="{{ url_for('login') }}" class="active">Login</a>
+          <a href="{{ url_for('signup') }}">Sign Up</a>
+        </div>
+
+        <form method="POST">
+          <input type="text" name="userid" placeholder="User ID" required>
+
+          <!-- Password with eye icon -->
+          <div class="input-with-icon">
+            <input type="password" id="login-password" name="password" placeholder="Password" required>
+            <span class="pw-toggle" onclick="togglePassword()">👁️</span>
+          </div>
+
+          <button type="submit">Login</button>
+        </form>
+
+        <p><a href="{{ url_for('forgot_password') }}">Forgot Password?</a></p>
+
+        <!-- Google Login button -->
+        <div class="google-btn">
+          <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=315257699447-omc2ll2jq7ekbbn6qc37k3lko1v4qkb9.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fcallback&response_type=code&scope=openid%20email%20profile&access_type=offline&prompt=select_account">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" 
+                 alt="Google logo" style="width:20px; margin-right:8px; vertical-align:middle;">
+            Continue with Google
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simple JavaScript -->
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById("login-password");
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+      } else {
+        passwordInput.type = "password";
+      }
+    }
+  </script>
+</body>
+</html>
